@@ -1,1 +1,2 @@
-include ':app'
+include ':app', ':saw-core'
+project(':saw-core').projectDir = new File(settingsDir, '../../../IntellijIDEA/syafiq.freelancer.app.madm.saw/core')

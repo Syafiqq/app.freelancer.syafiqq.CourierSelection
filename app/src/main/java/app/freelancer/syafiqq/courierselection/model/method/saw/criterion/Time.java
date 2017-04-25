@@ -113,11 +113,10 @@ public class Time extends Criterion
             return false;
         }
 
-        @NotNull Time fleet = (Time) o;
+        @NotNull Time time = (Time) o;
 
         return new EqualsBuilder()
-                .append(getValue(), fleet.getValue())
-                .append(getNormalization(), fleet.getNormalization())
+                .append(getValue(), time.getValue())
                 .isEquals();
     }
 

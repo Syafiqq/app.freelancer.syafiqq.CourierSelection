@@ -113,11 +113,10 @@ public class Cost extends Criterion
             return false;
         }
 
-        @NotNull Cost fleet = (Cost) o;
+        @NotNull Cost cost = (Cost) o;
 
         return new EqualsBuilder()
-                .append(getValue(), fleet.getValue())
-                .append(getNormalization(), fleet.getNormalization())
+                .append(getValue(), cost.getValue())
                 .isEquals();
     }
 

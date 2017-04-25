@@ -113,11 +113,10 @@ public class Packaging extends Criterion
             return false;
         }
 
-        @NotNull Packaging fleet = (Packaging) o;
+        @NotNull Packaging packaging = (Packaging) o;
 
         return new EqualsBuilder()
-                .append(getValue(), fleet.getValue())
-                .append(getNormalization(), fleet.getNormalization())
+                .append(getValue(), packaging.getValue())
                 .isEquals();
     }
 

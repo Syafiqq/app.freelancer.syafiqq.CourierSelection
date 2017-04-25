@@ -113,11 +113,10 @@ public class Coverage extends Criterion
             return false;
         }
 
-        @NotNull Coverage fleet = (Coverage) o;
+        @NotNull Coverage coverage = (Coverage) o;
 
         return new EqualsBuilder()
-                .append(getValue(), fleet.getValue())
-                .append(getNormalization(), fleet.getNormalization())
+                .append(getValue(), coverage.getValue())
                 .isEquals();
     }
 

@@ -117,7 +117,6 @@ public class Fleet extends Criterion
 
         return new EqualsBuilder()
                 .append(getValue(), fleet.getValue())
-                .append(getNormalization(), fleet.getNormalization())
                 .isEquals();
     }
 

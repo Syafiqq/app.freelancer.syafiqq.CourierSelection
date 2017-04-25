@@ -113,11 +113,10 @@ public class Experience extends Criterion
             return false;
         }
 
-        @NotNull Experience fleet = (Experience) o;
+        @NotNull Experience experience = (Experience) o;
 
         return new EqualsBuilder()
-                .append(getValue(), fleet.getValue())
-                .append(getNormalization(), fleet.getNormalization())
+                .append(getValue(), experience.getValue())
                 .isEquals();
     }
 

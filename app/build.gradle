@@ -25,7 +25,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     dexOptions {
-        incremental true
         javaMaxHeapSize "2g"
     }
 }

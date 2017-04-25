@@ -39,4 +39,5 @@ dependencies {
     compile 'com.jakewharton.timber:timber:4.5.1'
     testCompile 'junit:junit:4.12'
     compile project(':saw-core')
+    compile project(':topsis-core')
 }

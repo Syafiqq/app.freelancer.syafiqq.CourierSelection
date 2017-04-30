@@ -8,4 +8,7 @@
     <string name="content_dashboard_item_textview_label_cost">Harga</string>
     <string name="content_dashboard_item_textview_label_time">Waktu</string>
     <string name="content_dashboard_item_textview_label_packaging">Kemasan</string>
+    <string name="content_dashboard_item_imagebutton_edit">Edit</string>
+    <string name="content_dashboard_item_imagebutton_hide">Hide</string>
+    <string name="content_dashboard_item_imagebutton_delete">Delete</string>
 </resources>

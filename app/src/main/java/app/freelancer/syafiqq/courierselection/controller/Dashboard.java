@@ -119,4 +119,9 @@ public class Dashboard extends AppCompatActivity
             }
         }.execute();
     }
+
+    public RecyclerView.Adapter getAdapter()
+    {
+        return adapter;
+    }
 }

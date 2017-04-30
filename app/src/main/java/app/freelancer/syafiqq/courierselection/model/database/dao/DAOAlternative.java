@@ -90,6 +90,40 @@ public class DAOAlternative extends DatabaseModel
                 });
     }
 
+    public static void update(final SQLiteDatabase database, @NotNull MAlternative alternative)
+    {
+        Timber.d("static insert");
+
+        database.execSQL(
+                //String.format(Locale.getDefault(), "INSERT INTO %s(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                String.format(Locale.getDefault(), "UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?",
+                        DatabaseContract.Alternative.TABLE_NAME,
+                        DatabaseContract.Alternative.COLUMN_NAME_NAME,
+                        DatabaseContract.Alternative.COLUMN_NAME_FLEET,
+                        DatabaseContract.Alternative.COLUMN_NAME_COVERAGE,
+                        DatabaseContract.Alternative.COLUMN_NAME_EXPERIENCE,
+                        DatabaseContract.Alternative.COLUMN_NAME_COST,
+                        DatabaseContract.Alternative.COLUMN_NAME_TIME,
+                        DatabaseContract.Alternative.COLUMN_NAME_PACKAGING,
+                        DatabaseContract.Alternative.COLUMN_NAME_PROFILE,
+                        DatabaseContract.Alternative.COLUMN_NAME_ACTIVE,
+
+                        DatabaseContract.Alternative.COLUMN_NAME_ID
+                ),
+                new Object[] {
+                        alternative.getIdentity().getName(),
+                        alternative.getFleet().getValue(),
+                        alternative.getCoverage().getValue(),
+                        alternative.getExperience().getValue(),
+                        alternative.getCost().getValue(),
+                        alternative.getTime().getValue(),
+                        alternative.getPackaging().getValue(),
+                        alternative.getProfile().getId(),
+                        alternative.getActive(),
+                        alternative.getId()
+                });
+    }
+
     public static void deleteByID(SQLiteDatabase database, @NotNull MAlternative alternative)
     {
         Timber.d("static deleteByID");
@@ -257,5 +291,20 @@ public class DAOAlternative extends DatabaseModel
         }
 
         return DAOAlternative.getByProfileAndActive(super.database, profile, active);
+    }
+
+    public void update(@NotNull MAlternative alternative)
+    {
+        Timber.d("updateAlternative");
+        try
+        {
+            super.openWrite();
+        }
+        catch(SQLException ignored)
+        {
+            Timber.d("SQLException");
+        }
+
+        DAOAlternative.update(super.database, alternative);
     }
 }

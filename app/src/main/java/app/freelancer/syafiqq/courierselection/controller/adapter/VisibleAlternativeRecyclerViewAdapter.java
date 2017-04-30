@@ -23,6 +23,7 @@ import java.util.Observer;
 
 import app.freelancer.syafiqq.courierselection.R;
 import app.freelancer.syafiqq.courierselection.controller.Dashboard;
+import app.freelancer.syafiqq.courierselection.model.database.dao.DAOAlternative;
 import app.freelancer.syafiqq.courierselection.model.database.model.MAlternative;
 import app.freelancer.syafiqq.courierselection.model.method.saw.criterion.Cost;
 import app.freelancer.syafiqq.courierselection.model.method.saw.criterion.Coverage;
@@ -45,6 +46,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
     private final AppCompatActivity  root;
     private final List<MAlternative> dataset;
     private final Observer           onAlternativeDeletion;
+    private final Observer           onAlternativeUpdate;
 
     public VisibleAlternativeRecyclerViewAdapter(AppCompatActivity root, List<MAlternative> objects)
     {
@@ -66,7 +68,9 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
                         @Override
                         protected Void doInBackground(Void... params)
                         {
-                            VisibleAlternativeRecyclerViewAdapter.this.dataset.remove(alternative);
+                            @NotNull
+                            final DAOAlternative modelData = DAOAlternative.getInstance(VisibleAlternativeRecyclerViewAdapter.this.root.getApplicationContext());
+                            modelData.deleteByID(alternative);
                             return null;
                         }
 
@@ -74,6 +78,40 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
                         protected void onPreExecute()
                         {
                             super.onPreExecute();
+                            VisibleAlternativeRecyclerViewAdapter.this.dataset.remove(alternative);
+                            ((Dashboard) VisibleAlternativeRecyclerViewAdapter.this.root).getAdapter().notifyDataSetChanged();
+                        }
+                    }.execute();
+                }
+            }
+        };
+
+        this.onAlternativeUpdate = new Observer()
+        {
+            @Override
+            public void update(Observable o, Object arg)
+            {
+                if(arg instanceof MAlternative)
+                {
+                    @NotNull
+                    final MAlternative alternative = (MAlternative) arg;
+                    new AsyncTask<Void, Void, Void>()
+                    {
+                        @Override
+                        protected Void doInBackground(Void... params)
+                        {
+                            alternative.setActive(0);
+                            @NotNull
+                            final DAOAlternative modelData = DAOAlternative.getInstance(VisibleAlternativeRecyclerViewAdapter.this.root.getApplicationContext());
+                            modelData.update(alternative);
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPreExecute()
+                        {
+                            super.onPreExecute();
+                            VisibleAlternativeRecyclerViewAdapter.this.dataset.remove(alternative);
                             ((Dashboard) VisibleAlternativeRecyclerViewAdapter.this.root).getAdapter().notifyDataSetChanged();
                         }
                     }.execute();
@@ -114,6 +152,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         viewHolder.tvPackaging.setText(String.valueOf(medicalRecord.getPackaging().getValue()));
         viewHolder.setAlternative(medicalRecord);
         viewHolder.setDeleteAlternativeListener(this.onAlternativeDeletion);
+        viewHolder.setUpdateAlternativeListener(this.onAlternativeUpdate);
 
         mItemManger.bindView(viewHolder.itemView, position);
     }
@@ -163,6 +202,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         TextView     tvTime;
         TextView     tvPackaging;
         private Observer onAlternativeDeletion;
+        private Observer onAlternativeUpdate;
 
         public SimpleViewHolder(View itemView, final Context context)
         {
@@ -250,6 +290,11 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         private void onHideClick()
         {
             Timber.d("onHideClick");
+
+            if(this.onAlternativeUpdate != null)
+            {
+                this.onAlternativeUpdate.update(null, this.alternative);
+            }
         }
 
         private void onEditClick()
@@ -260,6 +305,11 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         public void setDeleteAlternativeListener(Observer onAlternativeDeletion)
         {
             this.onAlternativeDeletion = onAlternativeDeletion;
+        }
+
+        public void setUpdateAlternativeListener(Observer updateAlternativeListener)
+        {
+            this.onAlternativeUpdate = updateAlternativeListener;
         }
     }
 }

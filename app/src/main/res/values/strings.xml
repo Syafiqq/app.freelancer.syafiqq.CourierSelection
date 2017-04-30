@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Courier Selection</string>
+    <string name="application_name">Courier Selection</string>
+    <string name="content_splash_screen_title">Courier Selection</string>
+    <string name="title_activity_dashboard">Courier Selection</string>
+    <string name="content_dashboard_item_textview_label_fleet">Armada</string>
+    <string name="content_dashboard_item_textview_label_coverage">Jangkauan</string>
+    <string name="content_dashboard_item_textview_label_knowledge">Pengalaman</string>
+    <string name="content_dashboard_item_textview_label_cost">Harga</string>
+    <string name="content_dashboard_item_textview_label_time">Waktu</string>
+    <string name="content_dashboard_item_textview_label_packaging">Kemasan</string>
 </resources>

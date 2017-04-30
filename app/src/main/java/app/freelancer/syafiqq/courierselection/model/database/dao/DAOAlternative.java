@@ -90,6 +90,40 @@ public class DAOAlternative extends DatabaseModel
                 });
     }
 
+    public static void update(final SQLiteDatabase database, @NotNull MAlternative alternative)
+    {
+        Timber.d("static insert");
+
+        database.execSQL(
+                //String.format(Locale.getDefault(), "INSERT INTO %s(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                String.format(Locale.getDefault(), "UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?",
+                        DatabaseContract.Alternative.TABLE_NAME,
+                        DatabaseContract.Alternative.COLUMN_NAME_NAME,
+                        DatabaseContract.Alternative.COLUMN_NAME_FLEET,
+                        DatabaseContract.Alternative.COLUMN_NAME_COVERAGE,
+                        DatabaseContract.Alternative.COLUMN_NAME_EXPERIENCE,
+                        DatabaseContract.Alternative.COLUMN_NAME_COST,
+                        DatabaseContract.Alternative.COLUMN_NAME_TIME,
+                        DatabaseContract.Alternative.COLUMN_NAME_PACKAGING,
+                        DatabaseContract.Alternative.COLUMN_NAME_PROFILE,
+                        DatabaseContract.Alternative.COLUMN_NAME_ACTIVE,
+
+                        DatabaseContract.Alternative.COLUMN_NAME_ID
+                ),
+                new Object[] {
+                        alternative.getIdentity().getName(),
+                        alternative.getFleet().getValue(),
+                        alternative.getCoverage().getValue(),
+                        alternative.getExperience().getValue(),
+                        alternative.getCost().getValue(),
+                        alternative.getTime().getValue(),
+                        alternative.getPackaging().getValue(),
+                        alternative.getProfile().getId(),
+                        alternative.getActive(),
+                        alternative.getId()
+                });
+    }
+
     public static void deleteByID(SQLiteDatabase database, @NotNull MAlternative alternative)
     {
         Timber.d("static deleteByID");
@@ -122,6 +156,57 @@ public class DAOAlternative extends DatabaseModel
                         DatabaseContract.Alternative.COLUMN_NAME_ID
                 ),
                 new String[] {String.valueOf(profile.getId())});
+
+        final List<MAlternative> records = new LinkedList<>();
+        if(cursor.moveToFirst())
+        {
+            do
+            {
+                records.add(new MAlternative(
+                        cursor.getInt(0),
+                        new Identity(cursor.getString(1)),
+                        new Fleet(cursor.getInt(2)),
+                        new Coverage(cursor.getInt(3)),
+                        new Experience(cursor.getInt(4)),
+                        new Cost(cursor.getInt(5)),
+                        new Time(cursor.getInt(6)),
+                        new Packaging(cursor.getInt(7)),
+                        profile,
+                        cursor.getInt(8)
+                ));
+            }
+            while(cursor.moveToNext());
+        }
+        cursor.close();
+        return records;
+    }
+
+    private static List<MAlternative> getByProfileAndActive(@NotNull SQLiteDatabase database, @NotNull MProfile profile, boolean active)
+    {
+        Timber.d("static getByID");
+
+        final Cursor cursor = database.rawQuery(
+                String.format(
+                        Locale.getDefault(),
+                        "SELECT `%s`, `%s`, `%s`, `%s`, `%s`, `%s`, `%s`, `%s`, `%s` FROM `%s` WHERE `%s` = ? AND `%s` = ? ORDER BY `%s` ASC",
+                        DatabaseContract.Alternative.COLUMN_NAME_ID,
+                        DatabaseContract.Alternative.COLUMN_NAME_NAME,
+                        DatabaseContract.Alternative.COLUMN_NAME_FLEET,
+                        DatabaseContract.Alternative.COLUMN_NAME_COVERAGE,
+                        DatabaseContract.Alternative.COLUMN_NAME_EXPERIENCE,
+                        DatabaseContract.Alternative.COLUMN_NAME_COST,
+                        DatabaseContract.Alternative.COLUMN_NAME_TIME,
+                        DatabaseContract.Alternative.COLUMN_NAME_PACKAGING,
+                        DatabaseContract.Alternative.COLUMN_NAME_ACTIVE,
+
+                        DatabaseContract.Alternative.TABLE_NAME,
+
+                        DatabaseContract.Alternative.COLUMN_NAME_PROFILE,
+                        DatabaseContract.Alternative.COLUMN_NAME_ACTIVE,
+
+                        DatabaseContract.Alternative.COLUMN_NAME_ID
+                ),
+                new String[] {String.valueOf(profile.getId()), String.valueOf(active ? 1 : 0)});
 
         final List<MAlternative> records = new LinkedList<>();
         if(cursor.moveToFirst())
@@ -191,5 +276,35 @@ public class DAOAlternative extends DatabaseModel
         }
 
         return DAOAlternative.getByProfile(super.database, profile);
+    }
+
+    public List<MAlternative> getByProfileAndActive(@NotNull MProfile profile, boolean active)
+    {
+        Timber.d("getByID");
+        try
+        {
+            super.openRead();
+        }
+        catch(SQLException ignored)
+        {
+            Timber.d("SQLException");
+        }
+
+        return DAOAlternative.getByProfileAndActive(super.database, profile, active);
+    }
+
+    public void update(@NotNull MAlternative alternative)
+    {
+        Timber.d("updateAlternative");
+        try
+        {
+            super.openWrite();
+        }
+        catch(SQLException ignored)
+        {
+            Timber.d("SQLException");
+        }
+
+        DAOAlternative.update(super.database, alternative);
     }
 }

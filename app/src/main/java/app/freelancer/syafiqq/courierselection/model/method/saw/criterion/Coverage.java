@@ -24,6 +24,8 @@ import app.freelancer.syafiqq.madm.saw.core.factory.Weight;
 public class Coverage extends Criterion
 {
     public static final CriterionType TYPE = CriterionType.BENEFIT;
+    public static final int           min  = 1;
+    public static final int           max  = 2;
 
     private int    value;
     private double normalization;

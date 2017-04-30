@@ -82,6 +82,7 @@ public class MAlternative extends Courier
         return new EqualsBuilder()
                 .appendSuper(super.equals(o))
                 .append(getId(), that.getId())
+                .append(getActive(), that.getActive())
                 .append(getProfile(), that.getProfile())
                 .isEquals();
     }
@@ -91,8 +92,9 @@ public class MAlternative extends Courier
     {
         return new HashCodeBuilder(17, 37)
                 .appendSuper(super.hashCode())
-                .append(getId())
                 .append(getProfile())
+                .append(getId())
+                .append(getActive())
                 .toHashCode();
     }
 

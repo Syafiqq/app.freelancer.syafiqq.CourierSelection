@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.freelancer.syafiqq.courierselection.R;
-import app.freelancer.syafiqq.courierselection.controller.adapter.RecyclerViewAdapter;
+import app.freelancer.syafiqq.courierselection.controller.adapter.VisibleAlternativeRecyclerViewAdapter;
 import app.freelancer.syafiqq.courierselection.model.database.dao.DAOAlternative;
 import app.freelancer.syafiqq.courierselection.model.database.dao.DAOProfile;
 import app.freelancer.syafiqq.courierselection.model.database.model.MAlternative;
@@ -62,8 +62,8 @@ public class Dashboard extends AppCompatActivity
         recyclerView.addItemDecoration(new DividerItemDecoration(ContextCompat.getDrawable(super.getApplicationContext(), R.drawable.divider)));
         recyclerView.setItemAnimator(new FadeInRightAnimator());
 
-        this.adapter = new RecyclerViewAdapter(this, this.alternatives);
-        ((RecyclerViewAdapter) this.adapter).setMode(Attributes.Mode.Multiple);
+        this.adapter = new VisibleAlternativeRecyclerViewAdapter(this, this.alternatives);
+        ((VisibleAlternativeRecyclerViewAdapter) this.adapter).setMode(Attributes.Mode.Multiple);
         recyclerView.setAdapter(this.adapter);
     }
 

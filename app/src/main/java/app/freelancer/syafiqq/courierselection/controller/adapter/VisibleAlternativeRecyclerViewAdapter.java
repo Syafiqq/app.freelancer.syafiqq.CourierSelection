@@ -36,14 +36,14 @@ import timber.log.Timber;
  * Github       : syafiqq
  */
 
-public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapter.SimpleViewHolder>
+public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<VisibleAlternativeRecyclerViewAdapter.SimpleViewHolder>
 {
     private final AppCompatActivity  root;
     private final List<MAlternative> dataset;
 
-    public RecyclerViewAdapter(AppCompatActivity root, List<MAlternative> objects)
+    public VisibleAlternativeRecyclerViewAdapter(AppCompatActivity root, List<MAlternative> objects)
     {
-        Timber.d("RecyclerViewAdapter");
+        Timber.d("VisibleAlternativeRecyclerViewAdapter");
 
         this.dataset = objects;
         this.root = root;

@@ -18,10 +18,10 @@ import app.freelancer.syafiqq.courierselection.model.method.topsis.criterion.Fle
 import app.freelancer.syafiqq.courierselection.model.method.topsis.criterion.Packaging;
 import app.freelancer.syafiqq.courierselection.model.method.topsis.criterion.Time;
 import app.freelancer.syafiqq.courierselection.model.method.topsis.profit.ContinuousProfit;
+import app.freelancer.syafiqq.courierselection.model.method.topsis.property.Identity;
 import app.freelancer.syafiqq.madm.topsis.core.factory.AccumulatorContainer;
 import app.freelancer.syafiqq.madm.topsis.core.factory.Alternative;
 import app.freelancer.syafiqq.madm.topsis.core.factory.ProfitContainer;
-import app.freelancer.syafiqq.madm.topsis.core.factory.Properties;
 import app.freelancer.syafiqq.madm.topsis.core.factory.WeightContainer;
 
 /**
@@ -34,7 +34,7 @@ import app.freelancer.syafiqq.madm.topsis.core.factory.WeightContainer;
 
 public class Courier extends Alternative
 {
-    @NotNull private Properties properties;
+    @NotNull private Identity   identity;
     @NotNull private Fleet      fleet;
     @NotNull private Coverage   coverage;
     @NotNull private Experience experience;
@@ -43,9 +43,9 @@ public class Courier extends Alternative
     @NotNull private Packaging  packaging;
     private          double     total;
 
-    public Courier(@NotNull Properties properties, @NotNull Fleet fleet, @NotNull Coverage coverage, @NotNull Experience experience, @NotNull Cost cost, @NotNull Time time, @NotNull Packaging packaging)
+    public Courier(@NotNull Identity identity, @NotNull Fleet fleet, @NotNull Coverage coverage, @NotNull Experience experience, @NotNull Cost cost, @NotNull Time time, @NotNull Packaging packaging)
     {
-        this.properties = properties;
+        this.identity = identity;
         this.fleet = fleet;
         this.coverage = coverage;
         this.experience = experience;
@@ -188,14 +188,14 @@ public class Courier extends Alternative
     }
 
     @NonNull
-    public Properties getProperties()
+    public Identity getIdentity()
     {
-        return properties;
+        return identity;
     }
 
-    public void setProperties(@NonNull Properties properties)
+    public void setIdentity(@NonNull Identity identity)
     {
-        this.properties = properties;
+        this.identity = identity;
     }
 
     @NonNull
@@ -290,7 +290,7 @@ public class Courier extends Alternative
         Courier courier = (Courier) o;
 
         return new EqualsBuilder()
-                .append(getProperties(), courier.getProperties())
+                .append(getIdentity(), courier.getIdentity())
                 .append(getFleet(), courier.getFleet())
                 .append(getCoverage(), courier.getCoverage())
                 .append(getExperience(), courier.getExperience())
@@ -304,7 +304,7 @@ public class Courier extends Alternative
     public int hashCode()
     {
         return new HashCodeBuilder(17, 37)
-                .append(getProperties())
+                .append(getIdentity())
                 .append(getFleet())
                 .append(getCoverage())
                 .append(getExperience())
@@ -318,7 +318,7 @@ public class Courier extends Alternative
     public String toString()
     {
         return new ToStringBuilder(this)
-                .append("properties", properties)
+                .append("identity", identity)
                 .append("fleet", fleet)
                 .append("coverage", coverage)
                 .append("experience", experience)

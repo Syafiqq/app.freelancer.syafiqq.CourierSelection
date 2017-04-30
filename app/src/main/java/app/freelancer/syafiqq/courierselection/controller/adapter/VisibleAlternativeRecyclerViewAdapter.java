@@ -2,6 +2,7 @@ package app.freelancer.syafiqq.courierselection.controller.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,8 +18,11 @@ import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import app.freelancer.syafiqq.courierselection.R;
+import app.freelancer.syafiqq.courierselection.controller.Dashboard;
 import app.freelancer.syafiqq.courierselection.model.database.model.MAlternative;
 import app.freelancer.syafiqq.courierselection.model.method.saw.criterion.Cost;
 import app.freelancer.syafiqq.courierselection.model.method.saw.criterion.Coverage;
@@ -40,6 +44,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
 {
     private final AppCompatActivity  root;
     private final List<MAlternative> dataset;
+    private final Observer           onAlternativeDeletion;
 
     public VisibleAlternativeRecyclerViewAdapter(AppCompatActivity root, List<MAlternative> objects)
     {
@@ -47,6 +52,34 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
 
         this.dataset = objects;
         this.root = root;
+        this.onAlternativeDeletion = new Observer()
+        {
+            @Override
+            public void update(Observable o, final Object arg)
+            {
+                if(arg instanceof MAlternative)
+                {
+                    @NotNull
+                    final MAlternative alternative = (MAlternative) arg;
+                    new AsyncTask<Void, Void, Void>()
+                    {
+                        @Override
+                        protected Void doInBackground(Void... params)
+                        {
+                            VisibleAlternativeRecyclerViewAdapter.this.dataset.remove(alternative);
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPreExecute()
+                        {
+                            super.onPreExecute();
+                            ((Dashboard) VisibleAlternativeRecyclerViewAdapter.this.root).getAdapter().notifyDataSetChanged();
+                        }
+                    }.execute();
+                }
+            }
+        };
     }
 
     @Override
@@ -79,6 +112,8 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         viewHolder.tvCost.setText(String.valueOf(medicalRecord.getCost().getValue()));
         viewHolder.tvTime.setText(String.valueOf(medicalRecord.getTime().getValue()));
         viewHolder.tvPackaging.setText(String.valueOf(medicalRecord.getPackaging().getValue()));
+        viewHolder.setAlternative(medicalRecord);
+        viewHolder.setDeleteAlternativeListener(this.onAlternativeDeletion);
 
         mItemManger.bindView(viewHolder.itemView, position);
     }
@@ -109,23 +144,25 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
     {
         final Context context;
 
-        SwipeLayout swipeLayout;
-        TextView    title;
-        ImageButton edit;
-        ImageButton hide;
-        ImageButton delete;
-        ProgressBar pbFleet;
-        ProgressBar pbCoverage;
-        ProgressBar pbExperience;
-        ProgressBar pbCost;
-        ProgressBar pbTime;
-        ProgressBar pbPackaging;
-        TextView    tvFleet;
-        TextView    tvCoverage;
-        TextView    tvExperience;
-        TextView    tvCost;
-        TextView    tvTime;
-        TextView    tvPackaging;
+        MAlternative alternative;
+        SwipeLayout  swipeLayout;
+        TextView     title;
+        ImageButton  edit;
+        ImageButton  hide;
+        ImageButton  delete;
+        ProgressBar  pbFleet;
+        ProgressBar  pbCoverage;
+        ProgressBar  pbExperience;
+        ProgressBar  pbCost;
+        ProgressBar  pbTime;
+        ProgressBar  pbPackaging;
+        TextView     tvFleet;
+        TextView     tvCoverage;
+        TextView     tvExperience;
+        TextView     tvCost;
+        TextView     tvTime;
+        TextView     tvPackaging;
+        private Observer onAlternativeDeletion;
 
         public SimpleViewHolder(View itemView, final Context context)
         {
@@ -190,9 +227,24 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
             });
         }
 
+        public MAlternative getAlternative()
+        {
+            return alternative;
+        }
+
+        public void setAlternative(MAlternative alternative)
+        {
+            this.alternative = alternative;
+        }
+
         private void onDeleteClick()
         {
             Timber.d("onDeleteClick");
+
+            if(this.onAlternativeDeletion != null)
+            {
+                this.onAlternativeDeletion.update(null, this.alternative);
+            }
         }
 
         private void onHideClick()
@@ -203,6 +255,11 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         private void onEditClick()
         {
             Timber.d("onEditClick");
+        }
+
+        public void setDeleteAlternativeListener(Observer onAlternativeDeletion)
+        {
+            this.onAlternativeDeletion = onAlternativeDeletion;
         }
     }
 }

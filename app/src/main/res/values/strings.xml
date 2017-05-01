@@ -9,6 +9,17 @@
     <string name="content_dashboard_item_textview_label_time">Waktu</string>
     <string name="content_dashboard_item_textview_label_packaging">Kemasan</string>
     <string name="content_dashboard_item_imagebutton_edit">Edit</string>
-    <string name="content_dashboard_item_imagebutton_hide">Hide</string>
-    <string name="content_dashboard_item_imagebutton_delete">Delete</string>
+    <string name="content_dashboard_item_imagebutton_hide">Sembunyikan</string>
+    <string name="content_dashboard_item_imagebutton_delete">Hapus</string>
+    <string name="dashboard_menu_add_title">Tambah</string>
+    <string name="dashboard_menu_hide_title">Tersembunyi</string>
+    <string name="dashboard_menu_hide_weight">Bobot</string>
+    <string name="title_activity_add_alternative">Tambah Alternatif</string>
+    <string name="content_add_alternative_name_hint">Nama Alternatif</string>
+    <string name="content_add_alternative_textview_fleet">Jenis Armada</string>
+    <string name="content_add_alternative_textview_coverage">Jangauan</string>
+    <string name="content_add_alternative_textview_experience">Pengalaman Perusahaan</string>
+    <string name="content_add_alternative_textview_cost">Harga</string>
+    <string name="content_add_alternative_textview_time">Waktu Pengiriman</string>
+    <string name="content_add_alternative_textview_packaging">Hasil Packing/Kemasan</string>
 </resources>

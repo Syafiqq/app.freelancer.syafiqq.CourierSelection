@@ -137,21 +137,21 @@ public class InvisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapte
     {
         Timber.d("onBindViewHolder");
 
-        final MAlternative medicalRecord = this.dataset.get(position);
-        viewHolder.title.setText(medicalRecord.getIdentity().getName());
-        viewHolder.pbFleet.setProgress(this.getProgress(medicalRecord.getFleet().getValue(), Fleet.min, Fleet.max));
-        viewHolder.pbCoverage.setProgress(this.getProgress(medicalRecord.getCoverage().getValue(), Coverage.min, Coverage.max));
-        viewHolder.pbExperience.setProgress(this.getProgress(medicalRecord.getExperience().getValue(), Experience.min, Experience.max));
-        viewHolder.pbCost.setProgress(this.getProgress(medicalRecord.getCost().getValue(), Cost.min, Cost.max));
-        viewHolder.pbTime.setProgress(this.getProgress(medicalRecord.getTime().getValue(), Time.min, Time.max));
-        viewHolder.pbPackaging.setProgress(this.getProgress(medicalRecord.getPackaging().getValue(), Packaging.min, Packaging.max));
-        viewHolder.tvFleet.setText(String.valueOf(medicalRecord.getFleet().getValue()));
-        viewHolder.tvCoverage.setText(String.valueOf(medicalRecord.getCoverage().getValue()));
-        viewHolder.tvExperience.setText(String.valueOf(medicalRecord.getExperience().getValue()));
-        viewHolder.tvCost.setText(String.valueOf(medicalRecord.getCost().getValue()));
-        viewHolder.tvTime.setText(String.valueOf(medicalRecord.getTime().getValue()));
-        viewHolder.tvPackaging.setText(String.valueOf(medicalRecord.getPackaging().getValue()));
-        viewHolder.setAlternative(medicalRecord);
+        final MAlternative alternative = this.dataset.get(position);
+        viewHolder.title.setText(alternative.getIdentity().getName());
+        viewHolder.pbFleet.setProgress(this.getProgress(alternative.getFleet().getValue(), Fleet.min, Fleet.max));
+        viewHolder.pbCoverage.setProgress(this.getProgress(alternative.getCoverage().getValue(), Coverage.min, Coverage.max));
+        viewHolder.pbExperience.setProgress(this.getProgress(alternative.getExperience().getValue(), Experience.min, Experience.max));
+        viewHolder.pbCost.setProgress(this.getProgress(alternative.getCost().getValue(), Cost.min, Cost.max));
+        viewHolder.pbTime.setProgress(this.getProgress(alternative.getTime().getValue(), Time.min, Time.max));
+        viewHolder.pbPackaging.setProgress(this.getProgress(alternative.getPackaging().getValue(), Packaging.min, Packaging.max));
+        viewHolder.tvFleet.setText(String.valueOf(alternative.getFleet().getValue()));
+        viewHolder.tvCoverage.setText(String.valueOf(alternative.getCoverage().getValue()));
+        viewHolder.tvExperience.setText(String.valueOf(alternative.getExperience().getValue()));
+        viewHolder.tvCost.setText(String.valueOf(alternative.getCost().getValue()));
+        viewHolder.tvTime.setText(String.valueOf(alternative.getTime().getValue()));
+        viewHolder.tvPackaging.setText(String.valueOf(alternative.getPackaging().getValue()));
+        viewHolder.setAlternative(alternative);
         viewHolder.setDeleteAlternativeListener(this.onAlternativeDeletion);
         viewHolder.setUnhideAlternativeListener(this.onAlternativeHide);
 
@@ -224,13 +224,13 @@ public class InvisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapte
             this.delete = (ImageButton) container.findViewById(R.id.content_alternative_hider_item_imagebutton_delete);
             this.pbFleet = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_fleet);
             this.pbCoverage = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_coverage);
-            this.pbExperience = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_knowledge);
+            this.pbExperience = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_experience);
             this.pbCost = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_cost);
             this.pbTime = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_time);
             this.pbPackaging = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_packaging);
             this.tvFleet = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_fleet);
             this.tvCoverage = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_coverage);
-            this.tvExperience = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_knowledge);
+            this.tvExperience = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_experience);
             this.tvCost = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_cost);
             this.tvTime = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_time);
             this.tvPackaging = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_packaging);

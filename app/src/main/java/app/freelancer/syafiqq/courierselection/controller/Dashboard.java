@@ -1,12 +1,16 @@
 package app.freelancer.syafiqq.courierselection.controller;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.daimajia.swipe.util.Attributes;
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration;
@@ -44,6 +48,63 @@ public class Dashboard extends AppCompatActivity
         this.setProperties();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu)
+    {
+        Timber.d("onCreateOptionsMenu");
+
+        super.getMenuInflater().inflate(R.menu.dashboard_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item)
+    {
+        Timber.d("onOptionsItemSelected");
+
+        final int cItem = item.getItemId();
+        switch(cItem)
+        {
+            case R.id.dashboard_menu_add:
+            {
+                this.onToolbarAddMenuPressed();
+            }
+            break;
+            case R.id.dashboard_menu_hide:
+            {
+                this.onToolbarHideMenuPressed();
+            }
+            break;
+            case R.id.dashboard_menu_weight:
+            {
+                this.onToolbarWeightMenuPressed();
+            }
+            break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void onToolbarAddMenuPressed()
+    {
+        Timber.d("onToolbarAddMenuPressed");
+
+        @NotNull
+        final Intent intent = new Intent(this, AddAlternative.class);
+        this.startActivity(intent);
+    }
+
+    private void onToolbarHideMenuPressed()
+    {
+        Timber.d("onToolbarHideMenuPressed");
+
+    }
+
+    private void onToolbarWeightMenuPressed()
+    {
+        Timber.d("onToolbarWeightMenuPressed");
+
+    }
+
     private void setProperties()
     {
         Timber.d("setProperties");
@@ -70,7 +131,7 @@ public class Dashboard extends AppCompatActivity
     @Override
     protected void onPostResume()
     {
-        Timber.d("onCreate");
+        Timber.d("onPostResume");
 
         this.resetAlternative();
         this.populateAlternative();
@@ -111,17 +172,16 @@ public class Dashboard extends AppCompatActivity
             @Override
             protected void onPostExecute(Void aVoid)
             {
+                Dashboard.this.adapter.notifyDataSetChanged();
                 super.onPostExecute(aVoid);
-                for(@NotNull final MAlternative alternative : Dashboard.this.alternatives)
-                {
-                    Timber.d(alternative.toString());
-                }
             }
         }.execute();
     }
 
     public RecyclerView.Adapter getAdapter()
     {
+        Timber.d("getAdapter");
+
         return adapter;
     }
 }

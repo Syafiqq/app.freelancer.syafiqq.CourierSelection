@@ -6,6 +6,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.math3.util.FastMath;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import app.freelancer.syafiqq.courierselection.model.method.saw.profit.ContinuousProfit;
 import app.freelancer.syafiqq.courierselection.model.method.saw.type.CriterionType;
 import app.freelancer.syafiqq.courierselection.model.method.saw.weight.ContinuousWeight;
@@ -26,6 +29,14 @@ public class Coverage extends Criterion
     public static final CriterionType TYPE = CriterionType.BENEFIT;
     public static final int           min  = 1;
     public static final int           max  = 2;
+    public static final Map<Integer, String> spinnerVal;
+
+    static
+    {
+        spinnerVal = new LinkedHashMap<>();
+        spinnerVal.put(1, "Domestik");
+        spinnerVal.put(2, "Domestik dan Internasional");
+    }
 
     private int    value;
     private double normalization;
@@ -34,6 +45,11 @@ public class Coverage extends Criterion
     {
         this.value = value;
         this.normalization = 0.0;
+    }
+
+    public static int normalize(int id)
+    {
+        return Coverage.min + id;
     }
 
     @Override

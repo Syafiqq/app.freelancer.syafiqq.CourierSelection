@@ -136,12 +136,12 @@ public class DAOWeight extends DatabaseModel
             {
                 records = new MWeight(
                         cursor.getInt(0),
+                        new ContinuousWeight(cursor.getDouble(1)),
                         new ContinuousWeight(cursor.getDouble(2)),
                         new ContinuousWeight(cursor.getDouble(3)),
                         new ContinuousWeight(cursor.getDouble(4)),
                         new ContinuousWeight(cursor.getDouble(5)),
                         new ContinuousWeight(cursor.getDouble(6)),
-                        new ContinuousWeight(cursor.getDouble(7)),
                         profile
                 );
             }

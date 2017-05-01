@@ -26,6 +26,7 @@ import app.freelancer.syafiqq.courierselection.model.method.saw.property.Identit
 
 public class MAlternative extends Courier
 {
+    public static final int NULLID = -1;
     @NotNull private final MProfile profile;
     private                int      id;
     private                int      active;

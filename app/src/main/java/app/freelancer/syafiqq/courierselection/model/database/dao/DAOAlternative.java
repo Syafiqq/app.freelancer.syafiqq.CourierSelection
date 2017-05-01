@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import app.freelancer.syafiqq.courierselection.model.database.DatabaseContract;
 import app.freelancer.syafiqq.courierselection.model.database.DatabaseModel;
@@ -92,10 +93,9 @@ public class DAOAlternative extends DatabaseModel
 
     public static void update(final SQLiteDatabase database, @NotNull MAlternative alternative)
     {
-        Timber.d("static insert");
+        Timber.d("static update");
 
         database.execSQL(
-                //String.format(Locale.getDefault(), "INSERT INTO %s(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 String.format(Locale.getDefault(), "UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?",
                         DatabaseContract.Alternative.TABLE_NAME,
                         DatabaseContract.Alternative.COLUMN_NAME_NAME,
@@ -133,7 +133,7 @@ public class DAOAlternative extends DatabaseModel
 
     private static List<MAlternative> getByProfile(@NotNull SQLiteDatabase database, @NotNull MProfile profile)
     {
-        Timber.d("static getByID");
+        Timber.d("static getByProfile");
 
         final Cursor cursor = database.rawQuery(
                 String.format(
@@ -183,7 +183,7 @@ public class DAOAlternative extends DatabaseModel
 
     private static List<MAlternative> getByProfileAndActive(@NotNull SQLiteDatabase database, @NotNull MProfile profile, boolean active)
     {
-        Timber.d("static getByID");
+        Timber.d("static getByProfileAndActive");
 
         final Cursor cursor = database.rawQuery(
                 String.format(
@@ -232,6 +232,56 @@ public class DAOAlternative extends DatabaseModel
         return records;
     }
 
+    private static MAlternative getByID(@NotNull SQLiteDatabase database, int id, @NotNull Map<Integer, MProfile> profiles)
+    {
+        Timber.d("static getByID");
+
+        final Cursor cursor = database.rawQuery(
+                String.format(
+                        Locale.getDefault(),
+                        "SELECT `%s`, `%s`, `%s`, `%s`, `%s`, `%s`, `%s`, `%s`, `%s`, `%s` FROM `%s` WHERE `%s` = ? LIMIT 1",
+                        DatabaseContract.Alternative.COLUMN_NAME_ID,
+                        DatabaseContract.Alternative.COLUMN_NAME_NAME,
+                        DatabaseContract.Alternative.COLUMN_NAME_FLEET,
+                        DatabaseContract.Alternative.COLUMN_NAME_COVERAGE,
+                        DatabaseContract.Alternative.COLUMN_NAME_EXPERIENCE,
+                        DatabaseContract.Alternative.COLUMN_NAME_COST,
+                        DatabaseContract.Alternative.COLUMN_NAME_TIME,
+                        DatabaseContract.Alternative.COLUMN_NAME_PACKAGING,
+                        DatabaseContract.Alternative.COLUMN_NAME_PROFILE,
+                        DatabaseContract.Alternative.COLUMN_NAME_ACTIVE,
+
+                        DatabaseContract.Alternative.TABLE_NAME,
+
+                        DatabaseContract.Alternative.COLUMN_NAME_ID
+                ),
+                new String[] {String.valueOf(id)});
+
+        MAlternative record = null;
+        if(cursor.moveToFirst())
+        {
+            do
+            {
+                assert profiles.get(cursor.getInt(8)) != null;
+                record = new MAlternative(
+                        cursor.getInt(0),
+                        new Identity(cursor.getString(1)),
+                        new Fleet(cursor.getInt(2)),
+                        new Coverage(cursor.getInt(3)),
+                        new Experience(cursor.getInt(4)),
+                        new Cost(cursor.getInt(5)),
+                        new Time(cursor.getInt(6)),
+                        new Packaging(cursor.getInt(7)),
+                        profiles.get(cursor.getInt(8)),
+                        cursor.getInt(9)
+                );
+            }
+            while(cursor.moveToNext());
+        }
+        cursor.close();
+        return record;
+    }
+
     public void insert(@NotNull MAlternative alternative)
     {
         Timber.d("insert");
@@ -265,7 +315,7 @@ public class DAOAlternative extends DatabaseModel
 
     public List<MAlternative> getByProfile(@NotNull MProfile profile)
     {
-        Timber.d("getByID");
+        Timber.d("getByProfile");
         try
         {
             super.openRead();
@@ -280,7 +330,7 @@ public class DAOAlternative extends DatabaseModel
 
     public List<MAlternative> getByProfileAndActive(@NotNull MProfile profile, boolean active)
     {
-        Timber.d("getByID");
+        Timber.d("getByProfileAndActive");
         try
         {
             super.openRead();
@@ -295,7 +345,7 @@ public class DAOAlternative extends DatabaseModel
 
     public void update(@NotNull MAlternative alternative)
     {
-        Timber.d("updateAlternative");
+        Timber.d("update");
         try
         {
             super.openWrite();
@@ -306,5 +356,20 @@ public class DAOAlternative extends DatabaseModel
         }
 
         DAOAlternative.update(super.database, alternative);
+    }
+
+    public MAlternative getByID(int id, @NotNull Map<Integer, MProfile> profiles)
+    {
+        Timber.d("getByID");
+        try
+        {
+            super.openRead();
+        }
+        catch(SQLException ignored)
+        {
+            Timber.d("SQLException");
+        }
+
+        return DAOAlternative.getByID(super.database, id, profiles);
     }
 }

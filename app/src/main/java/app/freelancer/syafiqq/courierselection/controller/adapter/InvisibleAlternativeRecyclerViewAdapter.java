@@ -2,7 +2,6 @@ package app.freelancer.syafiqq.courierselection.controller.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -23,8 +22,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import app.freelancer.syafiqq.courierselection.R;
-import app.freelancer.syafiqq.courierselection.controller.Dashboard;
-import app.freelancer.syafiqq.courierselection.controller.UpdateAlternative;
+import app.freelancer.syafiqq.courierselection.controller.AlternativeHider;
 import app.freelancer.syafiqq.courierselection.model.database.dao.DAOAlternative;
 import app.freelancer.syafiqq.courierselection.model.database.model.MAlternative;
 import app.freelancer.syafiqq.courierselection.model.method.saw.criterion.Cost;
@@ -38,22 +36,22 @@ import timber.log.Timber;
 /**
  * This <CourierSelection> project created by :
  * Name         : syafiq
- * Date / Time  : 30 April 2017, 4:59 PM.
+ * Date / Time  : 01 May 2017, 10:46 AM.
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
 
-public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<VisibleAlternativeRecyclerViewAdapter.SimpleViewHolder>
+public class InvisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<InvisibleAlternativeRecyclerViewAdapter.SimpleViewHolder>
 {
     private final AppCompatActivity  root;
     private final List<MAlternative> dataset;
     private final Observer           onAlternativeDeletion;
     private final Observer           onAlternativeHide;
-    private final Observer           onAlternativeUpdate;
 
-    public VisibleAlternativeRecyclerViewAdapter(AppCompatActivity root, List<MAlternative> objects)
+
+    public InvisibleAlternativeRecyclerViewAdapter(AppCompatActivity root, List<MAlternative> objects)
     {
-        Timber.d("VisibleAlternativeRecyclerViewAdapter");
+        Timber.d("InvisibleAlternativeRecyclerViewAdapter");
 
         this.dataset = objects;
         this.root = root;
@@ -72,7 +70,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
                         protected Void doInBackground(Void... params)
                         {
                             @NotNull
-                            final DAOAlternative modelData = DAOAlternative.getInstance(VisibleAlternativeRecyclerViewAdapter.this.root.getApplicationContext());
+                            final DAOAlternative modelData = DAOAlternative.getInstance(InvisibleAlternativeRecyclerViewAdapter.this.root.getApplicationContext());
                             modelData.deleteByID(alternative);
                             return null;
                         }
@@ -81,8 +79,8 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
                         protected void onPreExecute()
                         {
                             super.onPreExecute();
-                            VisibleAlternativeRecyclerViewAdapter.this.dataset.remove(alternative);
-                            ((Dashboard) VisibleAlternativeRecyclerViewAdapter.this.root).getAdapter().notifyDataSetChanged();
+                            InvisibleAlternativeRecyclerViewAdapter.this.dataset.remove(alternative);
+                            ((AlternativeHider) InvisibleAlternativeRecyclerViewAdapter.this.root).getAdapter().notifyDataSetChanged();
                         }
                     }.execute();
                 }
@@ -103,9 +101,9 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
                         @Override
                         protected Void doInBackground(Void... params)
                         {
-                            alternative.setActive(0);
+                            alternative.setActive(1);
                             @NotNull
-                            final DAOAlternative modelData = DAOAlternative.getInstance(VisibleAlternativeRecyclerViewAdapter.this.root.getApplicationContext());
+                            final DAOAlternative modelData = DAOAlternative.getInstance(InvisibleAlternativeRecyclerViewAdapter.this.root.getApplicationContext());
                             modelData.update(alternative);
                             return null;
                         }
@@ -114,27 +112,10 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
                         protected void onPreExecute()
                         {
                             super.onPreExecute();
-                            VisibleAlternativeRecyclerViewAdapter.this.dataset.remove(alternative);
-                            ((Dashboard) VisibleAlternativeRecyclerViewAdapter.this.root).getAdapter().notifyDataSetChanged();
+                            InvisibleAlternativeRecyclerViewAdapter.this.dataset.remove(alternative);
+                            ((AlternativeHider) InvisibleAlternativeRecyclerViewAdapter.this.root).getAdapter().notifyDataSetChanged();
                         }
                     }.execute();
-                }
-            }
-        };
-
-        this.onAlternativeUpdate = new Observer()
-        {
-            @Override
-            public void update(Observable o, Object arg)
-            {
-                if(arg instanceof MAlternative)
-                {
-                    @NotNull
-                    final MAlternative alternative = (MAlternative) arg;
-                    @NotNull
-                    final Intent intent = new Intent(VisibleAlternativeRecyclerViewAdapter.this.root, UpdateAlternative.class);
-                    intent.putExtra(UpdateAlternative.ALTERNATIVE_ID, alternative.getId());
-                    VisibleAlternativeRecyclerViewAdapter.this.root.startActivity(intent);
                 }
             }
         };
@@ -146,7 +127,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         Timber.d("onCreateViewHolder");
 
         @NotNull
-        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_dashboard_item, parent, false);
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_alternative_hider_item, parent, false);
         return new SimpleViewHolder(view, parent.getContext());
     }
 
@@ -172,8 +153,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         viewHolder.tvPackaging.setText(String.valueOf(alternative.getPackaging().getValue()));
         viewHolder.setAlternative(alternative);
         viewHolder.setDeleteAlternativeListener(this.onAlternativeDeletion);
-        viewHolder.setHideAlternativeListener(this.onAlternativeHide);
-        viewHolder.setUpdateAlternativeListener(this.onAlternativeUpdate);
+        viewHolder.setUnhideAlternativeListener(this.onAlternativeHide);
 
         mItemManger.bindView(viewHolder.itemView, position);
     }
@@ -197,7 +177,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
     {
         Timber.d("getSwipeLayoutResourceId");
 
-        return R.id.content_dashboard_item_swipelayout_swipe;
+        return R.id.content_alternative_hider_item_swipelayout_swipe;
     }
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder
@@ -207,7 +187,6 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         MAlternative alternative;
         SwipeLayout  swipeLayout;
         TextView     title;
-        ImageButton  edit;
         ImageButton  hide;
         ImageButton  delete;
         ProgressBar  pbFleet;
@@ -223,8 +202,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         TextView     tvTime;
         TextView     tvPackaging;
         private Observer onAlternativeDeletion;
-        private Observer onAlternativeHide;
-        private Observer onAlternativeUpdate;
+        private Observer onAlternativeUnhide;
 
         public SimpleViewHolder(View itemView, final Context context)
         {
@@ -240,37 +218,28 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         {
             Timber.d("registerView");
 
-            this.swipeLayout = (SwipeLayout) container.findViewById(R.id.content_dashboard_item_swipelayout_swipe);
-            this.title = (TextView) container.findViewById(R.id.content_dashboard_item_textview_alternative_name);
-            this.edit = (ImageButton) container.findViewById(R.id.content_dashboard_item_imagebutton_edit);
-            this.hide = (ImageButton) container.findViewById(R.id.content_dashboard_item_imagebutton_hide);
-            this.delete = (ImageButton) container.findViewById(R.id.content_dashboard_item_imagebutton_delete);
-            this.pbFleet = (ProgressBar) container.findViewById(R.id.content_dashboard_item_progressbar_fleet);
-            this.pbCoverage = (ProgressBar) container.findViewById(R.id.content_dashboard_item_progressbar_coverage);
-            this.pbExperience = (ProgressBar) container.findViewById(R.id.content_dashboard_item_progressbar_experience);
-            this.pbCost = (ProgressBar) container.findViewById(R.id.content_dashboard_item_progressbar_cost);
-            this.pbTime = (ProgressBar) container.findViewById(R.id.content_dashboard_item_progressbar_time);
-            this.pbPackaging = (ProgressBar) container.findViewById(R.id.content_dashboard_item_progressbar_packaging);
-            this.tvFleet = (TextView) container.findViewById(R.id.content_dashboard_item_textview_fleet);
-            this.tvCoverage = (TextView) container.findViewById(R.id.content_dashboard_item_textview_coverage);
-            this.tvExperience = (TextView) container.findViewById(R.id.content_dashboard_item_textview_experience);
-            this.tvCost = (TextView) container.findViewById(R.id.content_dashboard_item_textview_cost);
-            this.tvTime = (TextView) container.findViewById(R.id.content_dashboard_item_textview_time);
-            this.tvPackaging = (TextView) container.findViewById(R.id.content_dashboard_item_textview_packaging);
+            this.swipeLayout = (SwipeLayout) container.findViewById(R.id.content_alternative_hider_item_swipelayout_swipe);
+            this.title = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_alternative_name);
+            this.hide = (ImageButton) container.findViewById(R.id.content_alternative_hider_item_imagebutton_hide);
+            this.delete = (ImageButton) container.findViewById(R.id.content_alternative_hider_item_imagebutton_delete);
+            this.pbFleet = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_fleet);
+            this.pbCoverage = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_coverage);
+            this.pbExperience = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_experience);
+            this.pbCost = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_cost);
+            this.pbTime = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_time);
+            this.pbPackaging = (ProgressBar) container.findViewById(R.id.content_alternative_hider_item_progressbar_packaging);
+            this.tvFleet = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_fleet);
+            this.tvCoverage = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_coverage);
+            this.tvExperience = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_experience);
+            this.tvCost = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_cost);
+            this.tvTime = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_time);
+            this.tvPackaging = (TextView) container.findViewById(R.id.content_alternative_hider_item_textview_packaging);
         }
 
         private void registerListener()
         {
             Timber.d("registerListener");
 
-            this.edit.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    SimpleViewHolder.this.onEditClick();
-                }
-            });
             this.hide.setOnClickListener(new View.OnClickListener()
             {
                 @Override
@@ -313,21 +282,12 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         {
             Timber.d("onHideClick");
 
-            if(this.onAlternativeHide != null)
+            if(this.onAlternativeUnhide != null)
             {
-                this.onAlternativeHide.update(null, this.alternative);
+                this.onAlternativeUnhide.update(null, this.alternative);
             }
         }
 
-        private void onEditClick()
-        {
-            Timber.d("onEditClick");
-
-            if(this.onAlternativeUpdate != null)
-            {
-                this.onAlternativeUpdate.update(null, this.alternative);
-            }
-        }
 
         public void setDeleteAlternativeListener(Observer deleteAlternativeListener)
         {
@@ -336,17 +296,13 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
             this.onAlternativeDeletion = deleteAlternativeListener;
         }
 
-        public void setHideAlternativeListener(Observer hideAlternativeListener)
+        public void setUnhideAlternativeListener(Observer unhideAlternativeListener)
         {
-            Timber.d("setHideAlternativeListener");
+            Timber.d("setUnhideAlternativeListener");
 
-            this.onAlternativeHide = hideAlternativeListener;
-        }
-
-        public void setUpdateAlternativeListener(Observer updateAlternativeListener)
-        {
-            this.onAlternativeUpdate = updateAlternativeListener;
+            this.onAlternativeUnhide = unhideAlternativeListener;
         }
     }
 }
+
 

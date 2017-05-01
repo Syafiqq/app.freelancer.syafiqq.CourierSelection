@@ -26,6 +26,51 @@
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".controller.AddAlternative"
+            android:label="@string/title_activity_add_alternative"
+            android:parentActivityName=".controller.Dashboard"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.freelancer.syafiqq.courierselection.controller.Dashboard"/>
+        </activity>
+        <activity
+            android:name=".controller.UpdateAlternative"
+            android:label="@string/title_activity_update_alternative"
+            android:parentActivityName=".controller.Dashboard"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.freelancer.syafiqq.courierselection.controller.Dashboard"/>
+        </activity>
+        <activity
+            android:name=".controller.AlternativeHider"
+            android:label="@string/title_activity_alternative_hider"
+            android:parentActivityName=".controller.Dashboard"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.freelancer.syafiqq.courierselection.controller.Dashboard"/>
+        </activity>
+        <activity
+            android:name=".controller.WeightModifier"
+            android:label="@string/title_activity_weight_modifier"
+            android:parentActivityName=".controller.Dashboard"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.freelancer.syafiqq.courierselection.controller.Dashboard"/>
+        </activity>
+        <activity
+            android:name=".controller.RankingResult"
+            android:label="@string/title_activity_rangking_result"
+            android:parentActivityName=".controller.Dashboard"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.freelancer.syafiqq.courierselection.controller.Dashboard"/>
+        </activity>
     </application>
 
 </manifest>

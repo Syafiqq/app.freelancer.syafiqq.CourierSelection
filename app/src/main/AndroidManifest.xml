@@ -35,6 +35,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="app.freelancer.syafiqq.courierselection.controller.Dashboard"/>
         </activity>
+        <activity
+            android:name=".controller.UpdateAlternative"
+            android:label="@string/title_activity_update_alternative"
+            android:parentActivityName=".controller.Dashboard"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.freelancer.syafiqq.courierselection.controller.Dashboard"/>
+        </activity>
     </application>
 
 </manifest>

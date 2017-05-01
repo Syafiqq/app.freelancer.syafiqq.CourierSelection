@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.daimajia.swipe.util.Attributes;
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration;
@@ -34,6 +36,7 @@ public class Dashboard extends AppCompatActivity
 {
     private List<MAlternative>   alternatives;
     private RecyclerView.Adapter adapter;
+    private FloatingActionButton calculate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -114,6 +117,17 @@ public class Dashboard extends AppCompatActivity
     private void setProperties()
     {
         Timber.d("setProperties");
+        this.calculate = (FloatingActionButton) super.findViewById(R.id.activity_dashboard_fab_calculate);
+        this.calculate.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                @NotNull
+                final Intent intent = new Intent(Dashboard.this, RankingResult.class);
+                Dashboard.this.startActivity(intent);
+            }
+        });
 
         this.resetAlternative();
         this.initializeList();

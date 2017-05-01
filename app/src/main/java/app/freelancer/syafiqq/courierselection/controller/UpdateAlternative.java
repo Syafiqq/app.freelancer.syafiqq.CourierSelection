@@ -54,8 +54,8 @@ public class UpdateAlternative extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Timber.d("onCreate");
 
-        setContentView(R.layout.activity_add_alternative);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_update_alternative);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_update_alternative_toolbar_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -72,14 +72,14 @@ public class UpdateAlternative extends AppCompatActivity
     {
         Timber.d("setProperties");
 
-        this.name = (MaterialEditText) findViewById(R.id.content_add_alternative_materialedittext_name);
-        this.save = (FloatingActionButton) findViewById(R.id.activity_add_alternative_fab_save);
-        this.fleet = (MaterialSpinner) findViewById(R.id.content_add_alternative_materialspinner_fleet);
-        this.coverage = (MaterialSpinner) findViewById(R.id.content_add_alternative_materialspinner_coverage);
-        this.experience = (MaterialSpinner) findViewById(R.id.content_add_alternative_materialspinner_experience);
-        this.cost = (MaterialSpinner) findViewById(R.id.content_add_alternative_materialspinner_cost);
-        this.time = (MaterialSpinner) findViewById(R.id.content_add_alternative_materialspinner_time);
-        this.packaging = (MaterialSpinner) findViewById(R.id.content_add_alternative_materialspinner_packaging);
+        this.name = (MaterialEditText) findViewById(R.id.content_update_alternative_materialedittext_name);
+        this.save = (FloatingActionButton) findViewById(R.id.activity_update_alternative_fab_save);
+        this.fleet = (MaterialSpinner) findViewById(R.id.content_update_alternative_materialspinner_fleet);
+        this.coverage = (MaterialSpinner) findViewById(R.id.content_update_alternative_materialspinner_coverage);
+        this.experience = (MaterialSpinner) findViewById(R.id.content_update_alternative_materialspinner_experience);
+        this.cost = (MaterialSpinner) findViewById(R.id.content_update_alternative_materialspinner_cost);
+        this.time = (MaterialSpinner) findViewById(R.id.content_update_alternative_materialspinner_time);
+        this.packaging = (MaterialSpinner) findViewById(R.id.content_update_alternative_materialspinner_packaging);
     }
 
     private void populateField()

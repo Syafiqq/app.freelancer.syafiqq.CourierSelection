@@ -51,7 +51,7 @@ public class AddAlternative extends AppCompatActivity
         Timber.d("onCreate");
 
         setContentView(R.layout.activity_add_alternative);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_add_alternative_toolbar_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

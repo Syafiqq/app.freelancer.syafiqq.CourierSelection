@@ -263,12 +263,25 @@ public class WeightModifier extends AppCompatActivity
                                     public void run()
                                     {
                                         that.observable.update(
-                                                Double.parseDouble(that.fleet.getText().toString()),
-                                                Double.parseDouble(that.coverage.getText().toString()),
-                                                Double.parseDouble(that.experience.getText().toString()),
-                                                Double.parseDouble(that.cost.getText().toString()),
-                                                Double.parseDouble(that.time.getText().toString()),
-                                                Double.parseDouble(that.packaging.getText().toString()));
+                                                this.getOrDefault(that.fleet.getText().toString(), 0.0),
+                                                this.getOrDefault(that.coverage.getText().toString(), 0.0),
+                                                this.getOrDefault(that.experience.getText().toString(), 0.0),
+                                                this.getOrDefault(that.cost.getText().toString(), 0.0),
+                                                this.getOrDefault(that.time.getText().toString(), 0.0),
+                                                this.getOrDefault(that.packaging.getText().toString(), 0.0));
+                                    }
+
+                                    private double getOrDefault(String s, double def)
+                                    {
+                                        try
+                                        {
+                                            def = Double.parseDouble(s);
+                                        }
+                                        catch(NumberFormatException ignored)
+                                        {
+
+                                        }
+                                        return def;
                                     }
                                 });
                             }

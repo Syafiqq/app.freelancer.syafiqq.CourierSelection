@@ -4,7 +4,7 @@
     <string name="title_activity_dashboard">Courier Selection</string>
     <string name="content_dashboard_item_textview_label_fleet">Armada</string>
     <string name="content_dashboard_item_textview_label_coverage">Jangkauan</string>
-    <string name="content_dashboard_item_textview_label_knowledge">Pengalaman</string>
+    <string name="content_dashboard_item_textview_label_experience">Pengalaman</string>
     <string name="content_dashboard_item_textview_label_cost">Harga</string>
     <string name="content_dashboard_item_textview_label_time">Waktu</string>
     <string name="content_dashboard_item_textview_label_packaging">Kemasan</string>
@@ -17,7 +17,7 @@
     <string name="title_activity_add_alternative">Tambah Alternatif</string>
     <string name="content_add_alternative_name_hint">Nama Alternatif</string>
     <string name="content_add_alternative_textview_fleet">Jenis Armada</string>
-    <string name="content_add_alternative_textview_coverage">Jangauan</string>
+    <string name="content_add_alternative_textview_coverage">Jangkauan</string>
     <string name="content_add_alternative_textview_experience">Pengalaman Perusahaan</string>
     <string name="content_add_alternative_textview_cost">Harga</string>
     <string name="content_add_alternative_textview_time">Waktu Pengiriman</string>
@@ -25,7 +25,7 @@
     <string name="title_activity_update_alternative">Update Alternatif</string>
     <string name="content_update_alternative_name_hint">Nama Alternatif</string>
     <string name="content_update_alternative_textview_fleet">Jenis Armada</string>
-    <string name="content_update_alternative_textview_coverage">Jangauan</string>
+    <string name="content_update_alternative_textview_coverage">Jangkauan</string>
     <string name="content_update_alternative_textview_experience">Pengalaman Perusahaan</string>
     <string name="content_update_alternative_textview_cost">Harga</string>
     <string name="content_update_alternative_textview_time">Waktu Pengiriman</string>
@@ -33,10 +33,23 @@
     <string name="title_activity_alternative_hider">Alternatif Tersembunyi</string>
     <string name="content_alternative_hider_item_textview_label_fleet">Armada</string>
     <string name="content_alternative_hider_item_textview_label_coverage">Jangkauan</string>
-    <string name="content_alternative_hider_item_textview_label_knowledge">Pengalaman</string>
+    <string name="content_alternative_hider_item_textview_label_experience">Pengalaman</string>
     <string name="content_alternative_hider_item_textview_label_cost">Harga</string>
     <string name="content_alternative_hider_item_textview_label_time">Waktu</string>
     <string name="content_alternative_hider_item_textview_label_packaging">Kemasan</string>
     <string name="content_alternative_hider_item_imagebutton_unhide">Tampilkan</string>
     <string name="content_alternative_hider_item_imagebutton_delete">Hapus</string>
+    <string name="title_activity_weight_modifier">Modifikasi Bobot</string>
+    <string name="content_weight_modifier_fleet_hint">Jenis Armada</string>
+    <string name="content_weight_modifier_coverage_hint">Jangkauan</string>
+    <string name="content_weight_modifier_experience_hint">Pengalaman Perusahan</string>
+    <string name="content_weight_modifier_cost_hint">Harga</string>
+    <string name="content_weight_modifier_time_hint">Waktu Pengiriman</string>
+    <string name="content_weight_modifier_packaging_hint">Hasil Packing/Kemasan</string>
+    <string name="content_weight_modifier_chart_label_fleet">Armada</string>
+    <string name="content_weight_modifier_chart_label_coverage">Jangkauan</string>
+    <string name="content_weight_modifier_chart_label_experience">Pengalaman</string>
+    <string name="content_weight_modifier_chart_label_cost">Harga</string>
+    <string name="content_weight_modifier_chart_label_time">Waktu</string>
+    <string name="content_weight_modifier_chart_label_packaging">Kemasan</string>
 </resources>

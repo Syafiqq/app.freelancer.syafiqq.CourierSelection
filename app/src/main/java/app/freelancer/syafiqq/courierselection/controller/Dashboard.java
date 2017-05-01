@@ -42,7 +42,7 @@ public class Dashboard extends AppCompatActivity
         Timber.d("onCreate");
 
         setContentView(R.layout.activity_dashboard);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_dashboard_toolbar_toolbar);
         setSupportActionBar(toolbar);
 
         this.setProperties();
@@ -97,6 +97,9 @@ public class Dashboard extends AppCompatActivity
     {
         Timber.d("onToolbarHideMenuPressed");
 
+        @NotNull
+        final Intent intent = new Intent(this, AlternativeHider.class);
+        this.startActivity(intent);
     }
 
     private void onToolbarWeightMenuPressed()

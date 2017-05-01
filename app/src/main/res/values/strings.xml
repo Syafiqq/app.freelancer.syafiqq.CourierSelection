@@ -22,4 +22,12 @@
     <string name="content_add_alternative_textview_cost">Harga</string>
     <string name="content_add_alternative_textview_time">Waktu Pengiriman</string>
     <string name="content_add_alternative_textview_packaging">Hasil Packing/Kemasan</string>
+    <string name="title_activity_update_alternative">UpdateAlternative</string>
+    <string name="content_update_alternative_name_hint">Nama Alternatif</string>
+    <string name="content_update_alternative_textview_fleet">Jenis Armada</string>
+    <string name="content_update_alternative_textview_coverage">Jangauan</string>
+    <string name="content_update_alternative_textview_experience">Pengalaman Perusahaan</string>
+    <string name="content_update_alternative_textview_cost">Harga</string>
+    <string name="content_update_alternative_textview_time">Waktu Pengiriman</string>
+    <string name="content_update_alternative_textview_packaging">Hasil Packing/Kemasan</string>
 </resources>

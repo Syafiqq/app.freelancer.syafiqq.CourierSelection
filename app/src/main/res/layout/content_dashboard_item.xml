@@ -119,7 +119,7 @@
                     android:minHeight="10dp"/>
 
                 <ProgressBar
-                    android:id="@+id/content_dashboard_item_progressbar_knowledge"
+                    android:id="@+id/content_dashboard_item_progressbar_experience"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -189,7 +189,7 @@
                     android:textSize="8sp"/>
 
                 <TextView
-                    android:id="@+id/content_dashboard_item_textview_knowledge"
+                    android:id="@+id/content_dashboard_item_textview_experience"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="1dp"

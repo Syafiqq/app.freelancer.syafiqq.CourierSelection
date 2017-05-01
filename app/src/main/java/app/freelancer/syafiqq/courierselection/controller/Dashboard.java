@@ -106,6 +106,9 @@ public class Dashboard extends AppCompatActivity
     {
         Timber.d("onToolbarWeightMenuPressed");
 
+        @NotNull
+        final Intent intent = new Intent(this, WeightModifier.class);
+        this.startActivity(intent);
     }
 
     private void setProperties()

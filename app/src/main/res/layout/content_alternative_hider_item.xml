@@ -54,7 +54,7 @@
                     android:layout_marginTop="1dp"
                     android:maxHeight="10dp"
                     android:minHeight="10dp"
-                    android:text="@string/content_alternative_hider_item_textview_label_knowledge"
+                    android:text="@string/content_alternative_hider_item_textview_label_experience"
                     android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
                     android:textSize="8sp"/>
 

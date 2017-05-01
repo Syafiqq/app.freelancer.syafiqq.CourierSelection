@@ -57,7 +57,7 @@ public class AddAlternative extends AppCompatActivity
 
 
         this.setProperties();
-        this.setField();
+        this.populateField();
         this.setValue();
         this.setListener();
     }
@@ -76,9 +76,9 @@ public class AddAlternative extends AppCompatActivity
         this.packaging = (MaterialSpinner) findViewById(R.id.content_add_alternative_materialspinner_packaging);
     }
 
-    private void setField()
+    private void populateField()
     {
-        Timber.d("setField");
+        Timber.d("populateField");
 
         this.fleet.setItems(new LinkedList<>(Fleet.spinnerVal.values()));
         this.coverage.setItems(new LinkedList<>(Coverage.spinnerVal.values()));
@@ -86,7 +86,7 @@ public class AddAlternative extends AppCompatActivity
         this.cost.setItems(new LinkedList<>(Cost.spinnerVal.values()));
         this.time.setItems(new LinkedList<>(Time.spinnerVal.values()));
         this.packaging.setItems(new LinkedList<>(Packaging.spinnerVal.values()));
-        this.resetValue();
+        this.resetField();
     }
 
     private void setValue()
@@ -152,7 +152,7 @@ public class AddAlternative extends AppCompatActivity
                         if(status)
                         {
                             Toast.makeText(that, "Tambah Alternatif Berhasil", Toast.LENGTH_SHORT).show();
-                            that.resetValue();
+                            that.resetField();
                         }
                         super.onPostExecute(status);
                     }
@@ -161,9 +161,9 @@ public class AddAlternative extends AppCompatActivity
         });
     }
 
-    private void resetValue()
+    private void resetField()
     {
-        Timber.d("resetValue");
+        Timber.d("resetField");
 
         this.name.setText("");
         this.fleet.setSelectedIndex(0);

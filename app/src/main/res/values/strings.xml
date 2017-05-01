@@ -52,4 +52,12 @@
     <string name="content_weight_modifier_chart_label_cost">Harga</string>
     <string name="content_weight_modifier_chart_label_time">Waktu</string>
     <string name="content_weight_modifier_chart_label_packaging">Kemasan</string>
+    <string name="title_activity_rangking_result">Hasil Ranking</string>
+    <string name="content_ranking_result_item_textview_label_fleet">Armada</string>
+    <string name="content_ranking_result_item_textview_label_coverage">Jangkauan</string>
+    <string name="content_ranking_result_item_textview_label_experience">Pengalaman</string>
+    <string name="content_ranking_result_item_textview_label_cost">Harga</string>
+    <string name="content_ranking_result_item_textview_label_time">Waktu</string>
+    <string name="content_ranking_result_item_textview_label_packaging">Kemasan</string>
+    <string name="word_ranking">Ranking</string>
 </resources>

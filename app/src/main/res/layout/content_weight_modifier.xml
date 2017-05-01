@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="app.freelancer.syafiqq.courierselection.controller.WeightModifier"
+    tools:showIn="@layout/activity_weight_modifier">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            >
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/content_weight_modifier_piechart_visual"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/content_weight_modifier_materialedittext_fleet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/content_weight_modifier_fleet_hint"
+                app:met_helperText="Integer"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/content_weight_modifier_materialedittext_coverage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/content_weight_modifier_coverage_hint"
+                app:met_helperText="Integer"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/content_weight_modifier_materialedittext_experience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/content_weight_modifier_experience_hint"
+                app:met_helperText="Integer"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/content_weight_modifier_materialedittext_cost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/content_weight_modifier_cost_hint"
+                app:met_helperText="Integer"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/content_weight_modifier_materialedittext_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/content_weight_modifier_time_hint"
+                app:met_helperText="Integer"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/content_weight_modifier_materialedittext_packaging"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/content_weight_modifier_packaging_hint"
+                app:met_helperText="Integer"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

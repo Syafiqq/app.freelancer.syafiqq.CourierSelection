@@ -2,6 +2,7 @@ package app.freelancer.syafiqq.courierselection.controller.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import java.util.Observer;
 
 import app.freelancer.syafiqq.courierselection.R;
 import app.freelancer.syafiqq.courierselection.controller.Dashboard;
+import app.freelancer.syafiqq.courierselection.controller.UpdateAlternative;
 import app.freelancer.syafiqq.courierselection.model.database.dao.DAOAlternative;
 import app.freelancer.syafiqq.courierselection.model.database.model.MAlternative;
 import app.freelancer.syafiqq.courierselection.model.method.saw.criterion.Cost;
@@ -46,6 +48,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
     private final AppCompatActivity  root;
     private final List<MAlternative> dataset;
     private final Observer           onAlternativeDeletion;
+    private final Observer           onAlternativeHide;
     private final Observer           onAlternativeUpdate;
 
     public VisibleAlternativeRecyclerViewAdapter(AppCompatActivity root, List<MAlternative> objects)
@@ -86,7 +89,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
             }
         };
 
-        this.onAlternativeUpdate = new Observer()
+        this.onAlternativeHide = new Observer()
         {
             @Override
             public void update(Observable o, Object arg)
@@ -115,6 +118,23 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
                             ((Dashboard) VisibleAlternativeRecyclerViewAdapter.this.root).getAdapter().notifyDataSetChanged();
                         }
                     }.execute();
+                }
+            }
+        };
+
+        this.onAlternativeUpdate = new Observer()
+        {
+            @Override
+            public void update(Observable o, Object arg)
+            {
+                if(arg instanceof MAlternative)
+                {
+                    @NotNull
+                    final MAlternative alternative = (MAlternative) arg;
+                    @NotNull
+                    final Intent intent = new Intent(VisibleAlternativeRecyclerViewAdapter.this.root, UpdateAlternative.class);
+                    intent.putExtra(UpdateAlternative.ALTERNATIVE_ID, alternative.getId());
+                    VisibleAlternativeRecyclerViewAdapter.this.root.startActivity(intent);
                 }
             }
         };
@@ -152,6 +172,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         viewHolder.tvPackaging.setText(String.valueOf(medicalRecord.getPackaging().getValue()));
         viewHolder.setAlternative(medicalRecord);
         viewHolder.setDeleteAlternativeListener(this.onAlternativeDeletion);
+        viewHolder.setHideAlternativeListener(this.onAlternativeHide);
         viewHolder.setUpdateAlternativeListener(this.onAlternativeUpdate);
 
         mItemManger.bindView(viewHolder.itemView, position);
@@ -202,6 +223,7 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         TextView     tvTime;
         TextView     tvPackaging;
         private Observer onAlternativeDeletion;
+        private Observer onAlternativeHide;
         private Observer onAlternativeUpdate;
 
         public SimpleViewHolder(View itemView, final Context context)
@@ -291,20 +313,34 @@ public class VisibleAlternativeRecyclerViewAdapter extends RecyclerSwipeAdapter<
         {
             Timber.d("onHideClick");
 
-            if(this.onAlternativeUpdate != null)
+            if(this.onAlternativeHide != null)
             {
-                this.onAlternativeUpdate.update(null, this.alternative);
+                this.onAlternativeHide.update(null, this.alternative);
             }
         }
 
         private void onEditClick()
         {
             Timber.d("onEditClick");
+
+            if(this.onAlternativeUpdate != null)
+            {
+                this.onAlternativeUpdate.update(null, this.alternative);
+            }
         }
 
-        public void setDeleteAlternativeListener(Observer onAlternativeDeletion)
+        public void setDeleteAlternativeListener(Observer deleteAlternativeListener)
         {
-            this.onAlternativeDeletion = onAlternativeDeletion;
+            Timber.d("setDeleteAlternativeListener");
+
+            this.onAlternativeDeletion = deleteAlternativeListener;
+        }
+
+        public void setHideAlternativeListener(Observer hideAlternativeListener)
+        {
+            Timber.d("setHideAlternativeListener");
+
+            this.onAlternativeHide = hideAlternativeListener;
         }
 
         public void setUpdateAlternativeListener(Observer updateAlternativeListener)

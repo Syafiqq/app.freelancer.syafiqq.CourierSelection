@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".controller.MainPage">
+    <item
+        android:id="@+id/dashboard_menu_add"
+        android:icon="@drawable/ic_add_white_24dp"
+        android:orderInCategory="1"
+        android:title="@string/dashboard_menu_add_title"
+        android:titleCondensed="Tambah Alternatif"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/dashboard_menu_hide"
+        android:icon="@drawable/ic_visibility_off_white_24dp"
+        android:orderInCategory="1"
+        android:title="@string/dashboard_menu_hide_title"
+        android:titleCondensed="Alternatif Disembunyikan"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/dashboard_menu_weight"
+        android:icon="@drawable/ic_donut_small_white_24dp"
+        android:orderInCategory="1"
+        android:title="@string/dashboard_menu_hide_weight"
+        android:titleCondensed="Bobot Alternatif"
+        app:showAsAction="never"/>
+</menu>

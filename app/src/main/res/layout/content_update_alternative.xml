@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="app.freelancer.syafiqq.courierselection.controller.UpdateAlternative"
+    tools:showIn="@layout/activity_update_alternative">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/content_update_alternative_materialedittext_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/content_update_alternative_name_hint"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/content_update_alternative_textview_fleet"/>
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/content_update_alternative_materialspinner_fleet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_background_color="@color/grey_200"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/content_update_alternative_textview_coverage"/>
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/content_update_alternative_materialspinner_coverage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_background_color="@color/grey_200"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/content_update_alternative_textview_experience"/>
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/content_update_alternative_materialspinner_experience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_background_color="@color/grey_200"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/content_update_alternative_textview_cost"/>
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/content_update_alternative_materialspinner_cost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_background_color="@color/grey_200"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/content_update_alternative_textview_time"/>
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/content_update_alternative_materialspinner_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_background_color="@color/grey_200"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/content_update_alternative_textview_packaging"/>
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/content_update_alternative_materialspinner_packaging"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_background_color="@color/grey_200"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

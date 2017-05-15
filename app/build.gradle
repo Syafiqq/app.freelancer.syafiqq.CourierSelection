@@ -37,8 +37,8 @@ dependencies {
     compile group: 'org.jetbrains', name: 'annotations', version: '15.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
     compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
-    compile project(':saw-core')
-    compile project(':topsis-core')
+    compile 'com.github.Syafiqq.mcdm-saw:core:1.0.6'
+    compile 'com.github.Syafiqq.mcdm-topsis:core:1.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jakewharton.timber:timber:4.5.1'

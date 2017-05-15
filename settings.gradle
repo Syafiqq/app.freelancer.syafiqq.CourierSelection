@@ -1,3 +1,1 @@
-include ':app', ':saw-core', ':topsis-core'
-project(':saw-core').projectDir = new File(settingsDir, '../../../IntellijIDEA/syafiq.freelancer.app.madm.saw/core')
-project(':topsis-core').projectDir = new File(settingsDir, '../../../IntellijIDEA/syafiq.freelancer.app.madm.topsis/core')
+include ':app'

@@ -25,13 +25,13 @@ public class SystemTest
     @Test
     public void it_success()
     {
-        Courier a1 = FactoryHelper.createCourier("JNE", 5, 2, 4, 2, 4, 3);
-        Courier a2 = FactoryHelper.createCourier("Kantor Pos Indonesia", 4, 1, 3, 2, 2, 4);
-        Courier a3 = FactoryHelper.createCourier("JET Express", 3, 2, 5, 3, 3, 2);
-        Courier a4 = FactoryHelper.createCourier("Lia Jaya Sentosa", 5, 1, 4, 1, 4, 1);
-        Courier a5 = FactoryHelper.createCourier("J & T Express", 1, 2, 1, 3, 1, 3);
-        Courier a6 = FactoryHelper.createCourier("TIKI", 4, 1, 2, 1, 1, 1);
-        Courier a7 = FactoryHelper.createCourier("SiCepat", 2, 2, 5, 2, 3, 2);
+        Courier a1 = FactoryHelper.createCourier("A1", 5, 2, 5, 1, 3, 4);
+        Courier a2 = FactoryHelper.createCourier("A2", 5, 2, 5, 2, 2, 2);
+        Courier a3 = FactoryHelper.createCourier("A3", 5, 2, 5, 1, 3, 3);
+        Courier a4 = FactoryHelper.createCourier("A4", 1, 1, 2, 3, 4, 2);
+        Courier a5 = FactoryHelper.createCourier("A5", 5, 2, 1, 1, 3, 3);
+        Courier a6 = FactoryHelper.createCourier("A6", 5, 2, 5, 1, 2, 2);
+        Courier a7 = FactoryHelper.createCourier("A7", 5, 2, 3, 2, 2, 2);
 
         ContinuousWeightContainer w = FactoryHelper.createContinuousWeightContainer(0.15, 0.15, 0.10, 0.10, 0.20, 0.30);
 
@@ -51,8 +51,8 @@ public class SystemTest
         saw.searchProfit();
         saw.calculate();
 
-        TOPSIS                         topsis = new TOPSIS();
-        ContinuousAccumulatorContainer a      = app.freelancer.syafiqq.courierselection.model.method.topsis.helper.FactoryHelper.createContinuousAccumulatorContainer(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        TOPSIS topsis = new TOPSIS();
+        ContinuousAccumulatorContainer a = app.freelancer.syafiqq.courierselection.model.method.topsis.helper.FactoryHelper.createContinuousAccumulatorContainer(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
         topsis.setDecisionMatrixAccumulator(a);
         topsis.setWeight(new ContinuousWeightContainerAdapter((ContinuousWeightContainer) saw.getWeight()));
 
